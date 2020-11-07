@@ -17,7 +17,7 @@ with open(path, 'r') as csvinput, open(path, 'w') as csvoutput:
     for row in reader: 
         text = row[0];
 
-        # TODO: get analytics
+        # TODO: get analysis
         score = 0.0
         magnitude = 0.0
         embedding = 0.0
