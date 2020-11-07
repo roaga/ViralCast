@@ -1,6 +1,10 @@
+from os import curdir
 import pandas as pd
 import glob
-path = r'C:\Learning\HackRPI2020\HackRPI2020\data'
+import os
+
+curdir = os.getcwd()
+path = curdir + '\data'
 all_files = glob.glob(path + "/*.csv")
 li = []
 for filename in all_files:
