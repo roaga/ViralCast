@@ -59,7 +59,7 @@ function App() {
 
                 <h2>About the Project</h2>
                 <h5 style={{lineHeight: 2}}>
-                    Using a <a href="https://www.kaggle.com/smid80/coronavirus-covid19-tweets-late-april" target="_blank">dataset</a> of [] tweets about COVID-19,
+                    Using a <a href="https://www.kaggle.com/smid80/coronavirus-covid19-tweets-late-april" target="_blank">dataset</a> of 500k tweets about COVID-19,
                     <br/>
                     we trained a model to predict how far a tweet would spread<br/>based on properties of its language.
                 </h5>
