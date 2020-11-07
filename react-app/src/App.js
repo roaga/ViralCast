@@ -4,6 +4,7 @@ import './App.css';
 import { BsChevronDown } from "react-icons/bs";
 import Iframe from 'react-iframe'
 import React, {useState, useEffect, useRef} from 'react';
+import * as V from 'victory';
 
 function App() {
     const [tweet, setTweet] = useState("");
@@ -33,7 +34,7 @@ function App() {
 
                 <div style={{width: "100%"}}>
                     <h2 ref={myRef}>Visualizing Our Model</h2>
-                    <Iframe url="https://us3.ca.analytics.ibm.com/bi/?perspective=dashboard&pathRef=.my_folders%2FCOVID%2Bdatasets%2FCOVID%2BNEWS%2BTWEETS&action=view&mode=dashboard&subView=model00000175a39de881_00000000"
+                    <Iframe url="https://google.com"
                         width="90%"
                         height="1000px"
                         id="myId"
