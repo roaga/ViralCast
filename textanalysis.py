@@ -49,13 +49,13 @@ with open(path, 'r') as csvinput, open(path, 'w') as csvoutput:
         word_count = len(text.split())
         char_count = len(text)
         avg_word_len = char_count / word_count
-        follower_count = row[2] # TODO: verify column number
+        follower_count = row[4]
         anger = 0.0
         disgust = 0.0
         fear = 0.0
         joy = 0.0
         sadness = 0.0
-        is_quote = 1 if row[3] else 0 # TODO: verify column number
+        is_quote = 1 if row[1] else 0
 
         # sentiment analysis
         sentiment_response = natural_language_understanding.analyze(
