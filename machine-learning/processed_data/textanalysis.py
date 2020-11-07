@@ -16,6 +16,12 @@ natural_language_understanding = NaturalLanguageUnderstandingV1(
 )
 natural_language_understanding.set_service_url('https://api.au-syd.natural-language-understanding.watson.cloud.ibm.com/instances/90774996-ec17-4440-b524-2c61f3a14481')
 
+entities_response = natural_language_understanding.analyze(
+    text="This is a test saying that I hate CNN, the worst network ever.",
+    features=Features(entities=EntitiesOptions(sentiment=True, emotion=True))).get_result()
+for entity in entities_response['entities']:
+    print(entity['emotion'])
+
 path = os.path.join(os.getcwd(), "tweets_cleaned.csv")
 
 print(path)
@@ -40,6 +46,8 @@ with open(path, 'r') as csvinput:
 
         all_data.append(row)
 
+        skipped_tweets = 0
+
         for row in reader: 
             text = row[0]
 
@@ -56,27 +64,30 @@ with open(path, 'r') as csvinput:
             joy = 0.0
             sadness = 0.0
 
-            # sentiment analysis
-            sentiment_response = natural_language_understanding.analyze(
-                text=text,
-                features=Features(sentiment=SentimentOptions())).get_result()
-            sentiment = sentiment_response['sentiment']['document']['score']
+            try:
+                # sentiment analysis
+                sentiment_response = natural_language_understanding.analyze(
+                    text=text,
+                    features=Features(sentiment=SentimentOptions())).get_result()
+                sentiment = sentiment_response['sentiment']['document']['score']
 
-            # entity analysis
-            entities_response = natural_language_understanding.analyze(
-                text=text,
-                features=Features(entities=EntitiesOptions(sentiment=True, emotion=True))).get_result()
-            sentiment_sum = 0
-            for entity in entities_response['entities']:
-                sentiment_sum += entity['sentiment']['score'] * entity['relevance']
-                entity_num += 1
-                anger += entity['emotion']['anger'] * entity['relevance']
-                disgust += entity['emotion']['disgust'] * entity['relevance']
-                fear += entity['emotion']['fear'] * entity['relevance']
-                joy += entity['emotion']['joy'] * entity['relevance']
-                sadness += entity['emotion']['sadness'] * entity['relevance']
+                # entity analysis
+                entities_response = natural_language_understanding.analyze(
+                    text=text,
+                    features=Features(entities=EntitiesOptions(sentiment=True, emotion=True))).get_result()
+                sentiment_sum = 0
+                for entity in entities_response['entities']:
+                    sentiment_sum += entity['sentiment']['score'] * entity['relevance']
+                    entity_num += 1
+                    anger += entity['emotion']['anger'] * entity['relevance']
+                    disgust += entity['emotion']['disgust'] * entity['relevance']
+                    fear += entity['emotion']['fear'] * entity['relevance']
+                    joy += entity['emotion']['joy'] * entity['relevance']
+                    sadness += entity['emotion']['sadness'] * entity['relevance']
 
-            sentiment = sentiment + sentiment_sum / 2
+                sentiment = sentiment + sentiment_sum / 2
+            except:
+                skipped_tweets += 1
 
             # append that analysis
             row.append(sentiment)
@@ -93,3 +104,5 @@ with open(path, 'r') as csvinput:
             all_data.append(row)
 
         writer.writerows(all_data)
+        
+        print(skipped_tweets + " tweets were unable to be analyzed and were ommited")
