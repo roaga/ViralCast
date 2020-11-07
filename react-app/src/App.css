@@ -67,9 +67,27 @@ input[type=submit] {
     background-color: #FAF6F6;
     /* box-shadow: 0px 1px 10px grey; */
     margin: 32px;
+    transform: scale(1);
+    transition: all 0.5s ease-in-out;
 }
 input[type=submit]:hover {
     cursor: pointer;
     background-color: #61dafb;
     border-radius: 10pt;
+    transform: scale(1.2);
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+.scroll-down {
+    color: black;
+    transform: scale(1);
+    transition: all 0.5s ease-in-out;
+}
+.scroll-down:hover{
+    cursor: pointer;
+    transform: scale(1.2);
+    color: #61dafb;
 }

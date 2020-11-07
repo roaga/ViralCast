@@ -3,12 +3,15 @@ import virus from './virus.png';
 import './App.css';
 import { BsChevronDown } from "react-icons/bs";
 import Iframe from 'react-iframe'
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useRef} from 'react';
 
 function App() {
     const [tweet, setTweet] = useState("");
     const [favorites, setFavorites] = useState(0);
     const [retweets, setRetweets] = useState(0);
+    const myRef = useRef(null);
+
+    const executeScroll = () => myRef.current.scrollIntoView({ behavior: 'smooth'});
 
     const handleTweet = () => {
         // TODO: call our ML model for predictions and set favorites and retweets
@@ -25,10 +28,10 @@ function App() {
                     <img src={twitter} className="App-logo" alt="logo" style={{width: 200, height: 200, marginLeft: 64}}/>
                 </div>
 
-                <BsChevronDown size={144} style={{marginBottom: 96}}/>
+                <BsChevronDown size={144} style={{marginBottom: 96}} onClick={executeScroll} className="scroll-down"/>
 
                 <div style={{width: "100%"}}>
-                    <h2>Visualizing Our Model</h2>
+                    <h2 ref={myRef}>Visualizing Our Model</h2>
                     <Iframe url="http://www.youtube.com/embed/xDMP3i36naA"
                         width="90%"
                         height="1000px"
