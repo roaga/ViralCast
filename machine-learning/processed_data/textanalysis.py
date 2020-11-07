@@ -14,7 +14,8 @@ natural_language_understanding = NaturalLanguageUnderstandingV1(
     version='2020-08-01',
     authenticator=authenticator
 )
-natural_language_understanding.set_service_url('https://api.au-syd.natural-language-understanding.watson.cloud.ibm.com/instances/90774996-ec17-4440-b524-2c61f3a14481')
+natural_language_understanding.set_service_url(
+    'https://api.au-syd.natural-language-understanding.watson.cloud.ibm.com/instances/90774996-ec17-4440-b524-2c61f3a14481')
 
 entities_response = natural_language_understanding.analyze(
     text="This is a test saying that I hate CNN, the worst network ever.",
@@ -22,7 +23,7 @@ entities_response = natural_language_understanding.analyze(
 for entity in entities_response['entities']:
     print(entity['emotion'])
 
-path = os.path.join(os.getcwd(), "tweets_cleaned.csv")
+path = os.path.join(os.getcwd(), "tweet_less_columns_and_rows.csv")
 
 print(path)
 
@@ -30,25 +31,17 @@ with open(path, 'r') as csvinput:
     with open(os.path.join(os.getcwd(), "tweets_data_final.csv"), 'w') as csvoutput:
         reader = csv.reader(csvinput)
         writer = csv.writer(csvoutput, lineterminator='\n')
+        next(reader)
 
-        all_data = []
-        row = next(reader)
-        row.append('Sentiment')
-        row.append('Entity_Num')
-        row.append('Word_Count')
-        row.append('Avg_Word_Length')
-        row.append('Character_Count')
-        row.append("Anger")
-        row.append("Digust")
-        row.append("Fear")
-        row.append("Joy")
-        row.append("Sadness")
-
-        all_data.append(row)
+        header = ["sentiment", "entity_num", "word_count",
+                  "avg_word_len", "char_count", "anger", "disgust", "fear", "joy", 
+                  "sadness", "is_quote", "favorites", "retweets", "followers", 
+                  "friends", "verified"]
+        writer.writerow(header)
 
         skipped_tweets = 0
 
-        for row in reader: 
+        for row in reader:
             text = row[0]
 
             # Get analysis
@@ -63,6 +56,12 @@ with open(path, 'r') as csvinput:
             fear = 0.0
             joy = 0.0
             sadness = 0.0
+            is_quote = 1 if row[1] else 0
+            followers = row[4] if row[4] else 0
+            friends = row[5] if row[5] else 0
+            verified = 1 if row[6] else 0
+            favorites = row[2] if row[2] else 0
+            retweets = row[3] if row[3] else 0
 
             try:
                 # sentiment analysis
@@ -77,32 +76,42 @@ with open(path, 'r') as csvinput:
                     features=Features(entities=EntitiesOptions(sentiment=True, emotion=True))).get_result()
                 sentiment_sum = 0
                 for entity in entities_response['entities']:
-                    sentiment_sum += entity['sentiment']['score'] * entity['relevance']
+                    sentiment_sum += entity['sentiment']['score'] * \
+                        entity['relevance']
                     entity_num += 1
                     anger += entity['emotion']['anger'] * entity['relevance']
-                    disgust += entity['emotion']['disgust'] * entity['relevance']
+                    disgust += entity['emotion']['disgust'] * \
+                        entity['relevance']
                     fear += entity['emotion']['fear'] * entity['relevance']
                     joy += entity['emotion']['joy'] * entity['relevance']
-                    sadness += entity['emotion']['sadness'] * entity['relevance']
+                    sadness += entity['emotion']['sadness'] * \
+                        entity['relevance']
 
                 sentiment = sentiment + sentiment_sum / 2
             except:
                 skipped_tweets += 1
+                continue
 
             # append that analysis
-            row.append(sentiment)
-            row.append(entity_num)
-            row.append(word_count)
-            row.append(avg_word_len)
-            row.append(char_count)
-            row.append(anger)
-            row.append(disgust)
-            row.append(fear)
-            row.append(joy)
-            row.append(sadness)
+            data = []
+            data.append(sentiment)
+            data.append(magnitude)
+            data.append(entity_num)
+            data.append(word_count)
+            data.append(char_count)
+            data.append(avg_word_len)
+            data.append(anger)
+            data.append(disgust)
+            data.append(fear)
+            data.append(joy)
+            data.append(sadness)
+            data.append(is_quote)
+            data.append(followers)
+            data.append(friends)
+            data.append(verified)
+            data.append(favorites)
+            data.append(retweets)
 
-            all_data.append(row)
+            writer.writerow(data)
 
-        writer.writerows(all_data)
-        
-        print(skipped_tweets + " tweets were unable to be analyzed and were ommited")
+        print(str(skipped_tweets) + " tweets were unable to be analyzed and were ommited")
