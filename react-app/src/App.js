@@ -5,11 +5,11 @@ import { BsChevronDown } from "react-icons/bs";
 import Iframe from 'react-iframe'
 import React, {useState, useEffect, useRef} from 'react';
 import * as V from 'victory';
-import {VictoryChart} from 'victory';
+import {VictoryChart, VictoryBar, VictoryTheme} from 'victory';
 
 function App() {
     const [tweet, setTweet] = useState("");
-    const [followers, setFollowers] = useState(0);
+    const [followers, setFollowers] = useState(null);
     const [favorites, setFavorites] = useState(0);
     const [retweets, setRetweets] = useState(0);
     const myRef = useRef(null);
@@ -43,6 +43,40 @@ function App() {
                         display="initial"
                         position="relative"
                     />
+
+                    <div style={{display: "flex", flexDirection: "row", justifyContent: "space-evenly", margin: 64}}>
+                        <h3>Favorites</h3>
+                        <h3>Retweets</h3>
+                    </div>
+
+                    <div style={{display: "flex", flexDirection: "row", justifyContent: "space-evenly", margin: 64}}>
+                        <VictoryChart theme={VictoryTheme.material} domainPadding={{x: 16}}>
+                            <VictoryBar
+                                style={{ data: { fill: "#e7505f" } }}
+                                barRatio={0.5}
+                                cornerRadius={{top: 14}}
+                                animate={{duration: 2000, onLoad: { duration: 1000 }}} 
+                                data={[
+                                    {x: 10, y: 1},
+                                    {x: 3, y: 2},
+                                    {x: 5, y: 11}
+                                ]}
+                            />
+                        </VictoryChart>
+
+                        <VictoryChart theme={VictoryTheme.material} domainPadding={{x: 16}}>
+                            <VictoryBar
+                                style={{ data: { fill: "#61dafb" } }}
+                                barRatio={0.5}
+                                cornerRadius={{top: 14}}
+                                animate={{duration: 2000, onLoad: { duration: 1000 }}} 
+                                data={[
+                                    {x: 10, y: 1},
+                                    {x: 3, y: 2}
+                                ]}
+                            />
+                        </VictoryChart>
+                    </div>
                 </div>
 
                 <div style={{width: "100%"}}>
@@ -55,6 +89,20 @@ function App() {
                             <textarea type="number" value={followers} onChange={event => setFollowers(event.target.value.replace(/\D/g,''))} style={{height: 30}} maxLength={10} placeholder="How many followers do you have?"/>
                             <input type="submit" value={"Predict Spread"}/>
                         </form>
+
+                        <VictoryChart theme={VictoryTheme.material} domainPadding={{x: 16}} categories={{x: ["Positivity", "Anger", "Disgust", "Fear", "Joy", "Sadness"]}}>
+                            <VictoryBar
+                                style={{ data: { fill: "#69b53b" } }}
+                                barRatio={0.5}
+                                cornerRadius={{top: 14}}
+                                animate={{duration: 2000, onLoad: { duration: 1000 }}} 
+                                data={[
+                                    {x: 1, y: -1},
+                                    {x: 3, y: 2},
+                                    {x: 5, y: 11}
+                                ]}
+                            />
+                        </VictoryChart>
 
                         <div>
                             <h3>Prediction</h3>
