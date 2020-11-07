@@ -12,12 +12,22 @@ function App() {
     const [followers, setFollowers] = useState(null);
     const [favorites, setFavorites] = useState(0);
     const [retweets, setRetweets] = useState(0);
+    const [features, setFeatures] = useState(null);
     const myRef = useRef(null);
 
     const executeScroll = () => myRef.current.scrollIntoView({ behavior: 'smooth'});
 
-    const handleTweet = () => {
-        // TODO: call our ML model for predictions and set favorites and retweets
+    const handleTweet = (e) => {
+        e.preventDefault()
+        
+        // extract features        
+        fetch("/features/" + tweet + "/" + followers).then(res => res.json()).then(
+            (result) => {
+                setFeatures(result)
+            }
+        );
+
+        // TODO: pass features into ML model
 
     }
 
@@ -35,14 +45,14 @@ function App() {
 
                 <div style={{width: "100%"}}>
                     <h2 ref={myRef}>Visualizing Our Model</h2>
-                    <Iframe url="https://google.com"
+                    {/* <Iframe url="https://google.com"
                         width="90%"
                         height="1000px"
                         id="myId"
                         className="myClassname"
                         display="initial"
                         position="relative"
-                    />
+                    /> */}
 
                     <div style={{display: "flex", flexDirection: "row", justifyContent: "space-evenly", margin: 64}}>
                         <h3>Favorites</h3>
@@ -90,16 +100,15 @@ function App() {
                             <input type="submit" value={"Predict Spread"}/>
                         </form>
 
-                        <VictoryChart theme={VictoryTheme.material} domainPadding={{x: 16}} categories={{x: ["Positivity", "Anger", "Disgust", "Fear", "Joy", "Sadness"]}}>
+                        <VictoryChart theme={VictoryTheme.material} domainPadding={{x: 100}} categories={{x: ["Favorites", "Retweets"]}} domain={{y: [0, 1000]}}>
                             <VictoryBar
-                                style={{ data: { fill: "#69b53b" } }}
+                                style={{ data: {fill: ({ datum }) => datum.x === "Favorites" ? "#e7505f" : "#61dafb"}}}
                                 barRatio={0.5}
                                 cornerRadius={{top: 14}}
                                 animate={{duration: 2000, onLoad: { duration: 1000 }}} 
                                 data={[
-                                    {x: 1, y: -1},
-                                    {x: 3, y: 2},
-                                    {x: 5, y: 11}
+                                    {x: "Favorites", y: favorites},
+                                    {x: "Retweets", y: retweets},
                                 ]}
                             />
                         </VictoryChart>

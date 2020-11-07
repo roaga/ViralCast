@@ -44,7 +44,6 @@ with open(path, 'r') as csvinput, open(path, 'w') as csvoutput:
 
         # get analysis
         sentiment = 0.0
-        magnitude = 0.0
         entity_num = 0.0
         word_count = len(text.split())
         char_count = len(text)
