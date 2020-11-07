@@ -57,7 +57,26 @@ function App() {
                     </div>
                 </div>
 
-                <h6>&copy;2020 Rohan Agarwal, Jed Magracia, Hanif Fauzan, Bao Tran @ HackRPI 2020</h6>
+                <h2>About the Project</h2>
+                <h5 style={{lineHeight: 2}}>
+                    Using a <a href="https://www.kaggle.com/smid80/coronavirus-covid19-tweets-late-april" target="_blank">dataset</a> of [] tweets about COVID-19,
+                    <br/>
+                    we trained a model to predict how far a tweet would spread<br/>based on properties of its language.
+                </h5>
+                <h5 style={{lineHeight: 2}}>
+                    We used Google Cloud NLP for text analysis
+                    <br/>
+                    and IBM Cognos Analytics for data visualization.
+                    <br/>
+                    This web app was built in React and Flask.
+                    <br/>
+                </h5>
+                <h5 style={{lineHeight: 2}}>
+                    Created @ HackRPI 2020.
+                </h5>
+
+
+                <h6>&copy;2020 Rohan Agarwal, Jed Magracia, Hanif Fauzan, Bao Tran</h6>
             </header>
         </div>
     );
