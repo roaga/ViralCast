@@ -5,7 +5,7 @@ import { BsChevronDown } from "react-icons/bs";
 import Iframe from 'react-iframe'
 import React, {useState, useRef} from 'react';
 import * as V from 'victory';
-import {VictoryChart, VictoryBar, VictoryLine, VictoryTheme} from 'victory';
+import {VictoryChart, VictoryBar, VictoryLine, VictoryTheme, VictoryLegend} from 'victory';
 
 function App() {
     const [tweet, setTweet] = useState("");
@@ -26,8 +26,13 @@ function App() {
             }
         );
 
-        // TODO: pass features into ML model
-
+        // pass features into ML model
+        fetch("/predict/" + features).then(res => res.json()).then(
+            (result) => {
+                setFavorites(result['favorites'])
+                setRetweets(result['retweets'])
+            }
+        )
     }
 
     return (
@@ -53,15 +58,21 @@ function App() {
                         position="relative"
                     /> */}
 
-                    <div style={{display: "flex", flexDirection: "row", justifyContent: "space-evenly"}}>
-                        <h3 style={{color: "#e7505f" }}>Favorites</h3>
-                        <h3 style={{color: "#61dafb" }}>Retweets</h3>
-                    </div>
-
-                    <div style={{display: "flex", flexDirection: "row", justifyContent: "space-evenly"}}>
+                    <div style={{display: "flex", flexDirection: "row", justifyContent: "space-evenly", marginTop: 0}}>
                         <VictoryChart theme={VictoryTheme.material} domainPadding={{x: 32, y: 32}} height={200} width={300}>
+                            <VictoryLegend x={96} y={0}
+                                title=""
+                                centerTitle
+                                orientation="horizontal"
+                                gutter={16}
+                                style={{title: {fontSize: 8 }, data: {size: 4}, labels: {fontSize: 8}}}
+                                data={[
+                                    { name: "Favorites", symbol: { fill: "#e7505f" } },
+                                    { name: "Retweets", symbol: { fill: "#61dafb" } }
+                                ]}
+                            />
                             <VictoryLine
-                                style={{ data: { stroke: "#e7505f" } }}
+                                style={{ data: { stroke: "#e7505f" }}}
                                 animate={{duration: 2000, onLoad: { duration: 1000 }}} 
                                 data={[
                                     {x: 10, y: 1},

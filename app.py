@@ -78,5 +78,9 @@ def extractFeatures(text, followers):
         }
     )
 
+@app.route("/predict/<features>")
+def makePrediction(features):
+    # TODO: make prediction
+
 if __name__ == "__main__":
     app.run()
