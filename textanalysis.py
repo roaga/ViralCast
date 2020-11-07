@@ -1,7 +1,8 @@
 import os
 import csv
 
-path = "C:\Learning\HackRPI2020\HackRPI2020\data"
+curdir = os.getcwd()
+path = curdir + '\data'
 with open(path, 'r') as csvinput, open(path, 'w') as csvoutput:
     writer = csv.writer(csvoutput, lineterminator='\n')
     reader = csv.reader(csvinput)
