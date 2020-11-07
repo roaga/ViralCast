@@ -3,9 +3,9 @@ import virus from './virus.png';
 import './App.css';
 import { BsChevronDown } from "react-icons/bs";
 import Iframe from 'react-iframe'
-import React, {useState, useEffect, useRef} from 'react';
+import React, {useState, useRef} from 'react';
 import * as V from 'victory';
-import {VictoryChart, VictoryBar, VictoryTheme} from 'victory';
+import {VictoryChart, VictoryBar, VictoryLine, VictoryTheme} from 'victory';
 
 function App() {
     const [tweet, setTweet] = useState("");
@@ -18,8 +18,7 @@ function App() {
     const executeScroll = () => myRef.current.scrollIntoView({ behavior: 'smooth'});
 
     const handleTweet = (e) => {
-        e.preventDefault()
-        
+        e.preventDefault();
         // extract features        
         fetch("/features/" + tweet + "/" + followers).then(res => res.json()).then(
             (result) => {
@@ -54,36 +53,32 @@ function App() {
                         position="relative"
                     /> */}
 
-                    <div style={{display: "flex", flexDirection: "row", justifyContent: "space-evenly", margin: 64}}>
-                        <h3>Favorites</h3>
-                        <h3>Retweets</h3>
+                    <div style={{display: "flex", flexDirection: "row", justifyContent: "space-evenly"}}>
+                        <h3 style={{color: "#e7505f" }}>Favorites</h3>
+                        <h3 style={{color: "#61dafb" }}>Retweets</h3>
                     </div>
 
-                    <div style={{display: "flex", flexDirection: "row", justifyContent: "space-evenly", margin: 64}}>
-                        <VictoryChart theme={VictoryTheme.material} domainPadding={{x: 16}}>
-                            <VictoryBar
-                                style={{ data: { fill: "#e7505f" } }}
-                                barRatio={0.5}
-                                cornerRadius={{top: 14}}
+                    <div style={{display: "flex", flexDirection: "row", justifyContent: "space-evenly"}}>
+                        <VictoryChart theme={VictoryTheme.material} domainPadding={{x: 32, y: 32}} height={200} width={300}>
+                            <VictoryLine
+                                style={{ data: { stroke: "#e7505f" } }}
                                 animate={{duration: 2000, onLoad: { duration: 1000 }}} 
                                 data={[
                                     {x: 10, y: 1},
                                     {x: 3, y: 2},
-                                    {x: 5, y: 11}
+                                    {x: 5, y: 10}
                                 ]}
+                                interpolation="natural"
                             />
-                        </VictoryChart>
-
-                        <VictoryChart theme={VictoryTheme.material} domainPadding={{x: 16}}>
-                            <VictoryBar
-                                style={{ data: { fill: "#61dafb" } }}
-                                barRatio={0.5}
-                                cornerRadius={{top: 14}}
+                            <VictoryLine
+                                style={{ data: { stroke: "#61dafb" } }}
                                 animate={{duration: 2000, onLoad: { duration: 1000 }}} 
                                 data={[
-                                    {x: 10, y: 1},
-                                    {x: 3, y: 2}
+                                    {x: 9, y: 1},
+                                    {x: 3, y: 4},
+                                    {x: 5, y: 8}
                                 ]}
+                                interpolation="natural"
                             />
                         </VictoryChart>
                     </div>
@@ -128,9 +123,7 @@ function App() {
                     we trained a model to predict how far a tweet would spread<br/>based on properties of its language,<br/>including sentiment, emotion, and entity analysis.
                 </h5>
                 <h5 style={{lineHeight: 2}}>
-                    We used the IBM Cloud API for text analysis
-                    <br/>
-                    and IBM Cognos Analytics for data visualization.
+                    We used IBM Watson Natural Language Understanding for text analysis.
                     <br/>
                     This web app was built in React and Flask.
                     <br/>
