@@ -16,7 +16,8 @@ natural_language_understanding = NaturalLanguageUnderstandingV1(
 )
 natural_language_understanding.set_service_url('https://api.au-syd.natural-language-understanding.watson.cloud.ibm.com/instances/90774996-ec17-4440-b524-2c61f3a14481')
 
-path = "C:\Learning\HackRPI2020\HackRPI2020\data"
+curdir = os.getcwd()
+path = curdir + '\data'
 with open(path, 'r') as csvinput, open(path, 'w') as csvoutput:
     writer = csv.writer(csvoutput, lineterminator='\n')
     reader = csv.reader(csvinput)
