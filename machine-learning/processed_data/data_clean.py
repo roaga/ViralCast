@@ -1,8 +1,10 @@
 import csv
+import os
 
-with open("tweets.csv", 'r') as r:
+path = os.path.join(os.getcwd(), "tweet_data.csv")
+with open(path, 'r') as r:
     reader = csv.reader(r)
-    index_to_keep = [4, 9, 10, 11, 12, 17, 18, 20]
+    index_to_keep = [4, 9, 10, 16, 17, 18, 20, 11, 12]
 
     with open('tweets_cleaned.csv', 'w') as w:
         writer = csv.writer(w)
@@ -13,4 +15,3 @@ with open("tweets.csv", 'r') as r:
                 if line.index(element) in index_to_keep:
                     row.append(element)
             writer.writerow(row)
-        
