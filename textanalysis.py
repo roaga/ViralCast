@@ -55,7 +55,7 @@ with open(path, 'r') as csvinput, open(path, 'w') as csvoutput:
         fear = 0.0
         joy = 0.0
         sadness = 0.0
-        is_quote = row[3] # TODO: verify column number
+        is_quote = 1 if row[3] else 0 # TODO: verify column number
 
         # sentiment analysis
         sentiment_response = natural_language_understanding.analyze(
