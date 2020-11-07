@@ -64,10 +64,10 @@ function App() {
                 <h5 style={{lineHeight: 2}}>
                     Using a <a href="https://www.kaggle.com/smid80/coronavirus-covid19-tweets-late-april" target="_blank">dataset</a> of 500k tweets about COVID-19,
                     <br/>
-                    we trained a model to predict how far a tweet would spread<br/>based on properties of its language.
+                    we trained a model to predict how far a tweet would spread<br/>based on properties of its language,<br/>including sentiment and entity analysis.
                 </h5>
                 <h5 style={{lineHeight: 2}}>
-                    We used Google Cloud NLP for text analysis
+                    We used the IBM Cloud API for text analysis
                     <br/>
                     and IBM Cognos Analytics for data visualization.
                     <br/>
