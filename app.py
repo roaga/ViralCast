@@ -80,7 +80,7 @@ def extractFeatures(text, followers):
 
 @app.route("/predict/<features>")
 def makePrediction(features):
-    # TODO: make prediction
+    # TODO: make prediction and return favorites, retweets, and whatever data we need for visualization
 
 if __name__ == "__main__":
     app.run()
