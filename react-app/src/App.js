@@ -7,6 +7,7 @@ import React, {useState, useEffect, useRef} from 'react';
 
 function App() {
     const [tweet, setTweet] = useState("");
+    const [followers, setFollowers] = useState(0);
     const [favorites, setFavorites] = useState(0);
     const [retweets, setRetweets] = useState(0);
     const myRef = useRef(null);
@@ -47,8 +48,9 @@ function App() {
 
                     <div style={{display: "flex", flexDirection: "row", justifyContent: "space-evenly", margin: 64}}>
                         <form onSubmit={(e) => handleTweet(e)} style={{display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center"}}>
-                            <h3>Write a Tweet</h3>
-                            <textarea value={tweet} onChange={event => setTweet(event.target.value)} maxLength={280}/>
+                            <h3>Test a Tweet</h3>
+                            <textarea value={tweet} onChange={event => setTweet(event.target.value)} maxLength={280} placeholder="Write your tweet here."/>
+                            <textarea type="number" value={followers} onChange={event => setFollowers(event.target.value.replace(/\D/g,''))} style={{height: 30}} maxLength={10} placeholder="How many followers do you have?"/>
                             <input type="submit" value={"Predict Spread"}/>
                         </form>
 
@@ -64,7 +66,7 @@ function App() {
                 <h5 style={{lineHeight: 2}}>
                     Using a <a href="https://www.kaggle.com/smid80/coronavirus-covid19-tweets-late-april" target="_blank">dataset</a> of 500k tweets about COVID-19,
                     <br/>
-                    we trained a model to predict how far a tweet would spread<br/>based on properties of its language,<br/>including sentiment and entity analysis.
+                    we trained a model to predict how far a tweet would spread<br/>based on properties of its language,<br/>including sentiment, emotion, and entity analysis.
                 </h5>
                 <h5 style={{lineHeight: 2}}>
                     We used the IBM Cloud API for text analysis
