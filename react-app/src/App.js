@@ -32,7 +32,7 @@ function App() {
 
                 <div style={{width: "100%"}}>
                     <h2 ref={myRef}>Visualizing Our Model</h2>
-                    <Iframe url="http://www.youtube.com/embed/xDMP3i36naA"
+                    <Iframe url="https://us3.ca.analytics.ibm.com/bi/?perspective=dashboard&pathRef=.my_folders%2FCOVID%2Bdatasets%2FCOVID%2BNEWS%2BTWEETS&action=view&mode=dashboard&subView=model00000175a39de881_00000000"
                         width="90%"
                         height="1000px"
                         id="myId"
