@@ -5,6 +5,7 @@ import { BsChevronDown } from "react-icons/bs";
 import Iframe from 'react-iframe'
 import React, {useState, useEffect, useRef} from 'react';
 import * as V from 'victory';
+import {VictoryChart} from 'victory';
 
 function App() {
     const [tweet, setTweet] = useState("");
