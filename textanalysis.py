@@ -27,6 +27,16 @@ with open(path, 'r') as csvinput, open(path, 'w') as csvoutput:
     row.append('Sentiment')
     row.append('Entity_Num')
     row.append('Word_Count')
+    row.append('Avg_Word_Length')
+    row.append('Character_Count')
+    row.append("Follower_Count")
+    row.append("Anger")
+    row.append("Digust")
+    row.append("Fear")
+    row.append("Joy")
+    row.append("Sadness")
+    row.append("Is_Quote")
+
     all.append(row)
 
     for row in reader: 
@@ -37,6 +47,15 @@ with open(path, 'r') as csvinput, open(path, 'w') as csvoutput:
         magnitude = 0.0
         entity_num = 0.0
         word_count = len(text.split())
+        char_count = len(text)
+        avg_word_len = char_count / word_count
+        follower_count = row[2] # TODO: verify column number
+        anger = 0.0
+        disgust = 0.0
+        fear = 0.0
+        joy = 0.0
+        sadness = 0.0
+        is_quote = row[3] # TODO: verify column number
 
         # sentiment analysis
         sentiment_response = natural_language_understanding.analyze(
@@ -44,13 +63,19 @@ with open(path, 'r') as csvinput, open(path, 'w') as csvoutput:
             features=Features(sentiment=SentimentOptions())).get_result()
         sentiment = sentiment_response['sentiment']['document']['score']
 
+        # entity analysis
         entities_response = natural_language_understanding.analyze(
             text=text,
-            features=Features(entities=EntitiesOptions())).get_result()
+            features=Features(entities=EntitiesOptions(sentiment=True, emotion=True))).get_result()
         sentiment_sum = 0
         for entity in entities_response['entities']:
-            sentiment_sum += entity['sentiment']['score']
+            sentiment_sum += entity['sentiment']['score'] * entity['relevance']
             entity_num += 1
+            anger += entity['emotion']['anger'] * entity['relevance']
+            disgust += entity['emotion']['disgust'] * entity['relevance']
+            fear += entity['emotion']['fear'] * entity['relevance']
+            joy += entity['emotion']['joy'] * entity['relevance']
+            sadness += entity['emotion']['sadness'] * entity['relevance']
 
         sentiment = sentiment + sentiment_sum / 2
 
@@ -58,6 +83,16 @@ with open(path, 'r') as csvinput, open(path, 'w') as csvoutput:
         row.append(sentiment)
         row.append(entity_num)
         row.append(word_count)
+        row.append(avg_word_len)
+        row.append(char_count)
+        row.append(follower_count)
+        row.append(anger)
+        row.append(disgust)
+        row.append(fear)
+        row.append(joy)
+        row.append(sadness)
+        row.append(is_quote)
+
         all.append(row)
 
     writer.writerows(all)
