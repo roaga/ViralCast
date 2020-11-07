@@ -35,27 +35,30 @@ def extractFeatures(text, followers):
     sadness = 0.0
     is_quote = 0.0
 
-    # sentiment analysis
-    sentiment_response = natural_language_understanding.analyze(
-        text=text,
-        features=Features(sentiment=SentimentOptions())).get_result()
-    sentiment = sentiment_response['sentiment']['document']['score']
+    try:
+        # sentiment analysis
+        sentiment_response = natural_language_understanding.analyze(
+            text=text,
+            features=Features(sentiment=SentimentOptions())).get_result()
+        sentiment = sentiment_response['sentiment']['document']['score']
 
-    # entity analysis
-    entities_response = natural_language_understanding.analyze(
-        text=text,
-        features=Features(entities=EntitiesOptions(sentiment=True, emotion=True))).get_result()
-    sentiment_sum = 0
-    for entity in entities_response['entities']:
-        sentiment_sum += entity['sentiment']['score'] * entity['relevance']
-        entity_num += 1
-        anger += entity['emotion']['anger'] * entity['relevance']
-        disgust += entity['emotion']['disgust'] * entity['relevance']
-        fear += entity['emotion']['fear'] * entity['relevance']
-        joy += entity['emotion']['joy'] * entity['relevance']
-        sadness += entity['emotion']['sadness'] * entity['relevance']
+        # entity analysis
+        entities_response = natural_language_understanding.analyze(
+            text=text,
+            features=Features(entities=EntitiesOptions(sentiment=True, emotion=True))).get_result()
+        sentiment_sum = 0
+        for entity in entities_response['entities']:
+            sentiment_sum += entity['sentiment']['score'] * entity['relevance']
+            entity_num += 1
+            anger += entity['emotion']['anger'] * entity['relevance']
+            disgust += entity['emotion']['disgust'] * entity['relevance']
+            fear += entity['emotion']['fear'] * entity['relevance']
+            joy += entity['emotion']['joy'] * entity['relevance']
+            sadness += entity['emotion']['sadness'] * entity['relevance']
 
-    sentiment = sentiment + sentiment_sum / 2
+        sentiment = sentiment + sentiment_sum / 2
+    except:
+        pass 
 
     return(
         {
