@@ -23,7 +23,7 @@ natural_language_understanding = NaturalLanguageUnderstandingV1(
 )
 natural_language_understanding.set_service_url('https://api.au-syd.natural-language-understanding.watson.cloud.ibm.com/instances/90774996-ec17-4440-b524-2c61f3a14481')
 
-app = Flask(__name__, static_folder="./react-app/build", static_url_path="/")
+app = Flask(__name__, static_folder="./build", static_url_path="/")
 CORS(app)
 
 @app.route('/')
