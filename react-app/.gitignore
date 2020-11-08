@@ -21,3 +21,10 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+# data
+/machine-learning/processed_data/cleaned_tweets.csv
+/machine-learning/processed_data/data.csv
+/machine-learning/processed_data/less_features.csv
+/machine-learning/processed_data/more_data.csv
+/machine-learning/processed_data/tweet_data.csv
