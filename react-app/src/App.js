@@ -22,7 +22,7 @@ function App() {
     const handleTweet = (e) => {
         e.preventDefault();
         // extract features    
-        fetch("http://localhost:5000/features/" + tweet.replace(" ", "-") + "/" + followers + "/" + friends + "/" + verified).then(res => res.json()).then(
+        fetch("http://localhost:5000/features/" + tweet.replace("#", "").replace(" ", "-").replace("?", "").replace("/", "") + "/" + followers + "/" + friends + "/" + verified).then(res => res.json()).then(
             (result) => {
                 setFeatures(result)
 
