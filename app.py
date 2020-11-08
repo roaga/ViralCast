@@ -30,7 +30,7 @@ CORS(app)
 def home():
     return app.send_static_file('index.html')
 
-@app.route('/features/<text>/<int:followers>/<int:friends>/<verified>')
+@app.route('/api/features/<text>/<int:followers>/<int:friends>/<verified>')
 def extractFeatures(text, followers, friends, verified):
     text = text.replace("-", " ")
     sentiment = 0.0
@@ -91,7 +91,7 @@ def extractFeatures(text, followers, friends, verified):
         }
     return(jsonify(dict))
 
-@app.route("/predict/<features>", methods = ['GET','POST'])
+@app.route("/api/predict/<features>", methods = ['GET','POST'])
 def makePrediction(features):
     features = json.loads(features.replace("-", " "))
     # make prediction and return favorites, retweets, and whatever data we need for visualization

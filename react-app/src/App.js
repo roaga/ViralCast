@@ -22,12 +22,12 @@ function App() {
     const handleTweet = (e) => {
         e.preventDefault();
         // extract features    
-        fetch('https://viral-cast.herokuapp.com/features/' + tweet.replace("#", "").replace(" ", "-").replace("?", "").replace("/", "") + "/" + followers + "/" + friends + "/" + verified).then(res => res.json()).then(
+        fetch('https://viral-cast.herokuapp.com/api/features/' + tweet.replace("#", "").replace(" ", "-").replace("?", "").replace("/", "") + "/" + followers + "/" + friends + "/" + verified).then(res => res.json()).then(
             (result) => {
                 setFeatures(result)
 
                 // pass features into ML model
-                fetch('https://viral-cast.herokuapp.com/predict/' + JSON.stringify(result).replace(" ", "-")).then(res => res.json()).then(
+                fetch('https://viral-cast.herokuapp.com/api/predict/' + JSON.stringify(result).replace(" ", "-")).then(res => res.json()).then(
                     (result) => {
                         setFavorites(Math.round(Math.abs(result['favorites']) / 20))
                         setRetweets(Math.round(Math.abs(result['retweets'])))
