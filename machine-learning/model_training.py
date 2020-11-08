@@ -52,6 +52,6 @@ r_square_favorites = metrics.r2_score(favorites_test, favorites_pred)
 print(r_square_retweets)
 print(r_square_favorites)
 
-retweet_dump = joblib.dump(retweet_linear_regression, "models/retweet_model.joblib,pkl", compress=9)
-favorite_dump = joblib.dump(favorites_linear_regression, "models/favorites_model.joblib,pkl", compress=9)
+retweet_dump = joblib.dump(retweet_linear_regression, "models/retweet_model.joblib.pkl", compress=9)
+favorite_dump = joblib.dump(favorites_linear_regression, "models/favorites_model.joblib.pkl", compress=9)
 

@@ -1,8 +1,14 @@
-from flask import Flask, redirect, url_for, render_template
+from flask import Flask, redirect, url_for, render_template, jsonify
+from flask_cors import CORS, cross_origin
 from dotenv import load_dotenv
 import os
 import joblib
+import json
 import numpy as np
+from sklearn.linear_model import *
+from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import PolynomialFeatures
+from sklearn import metrics
 from ibm_watson import NaturalLanguageUnderstandingV1
 from ibm_cloud_sdk_core.authenticators import IAMAuthenticator
 from ibm_watson.natural_language_understanding_v1 import Features, SentimentOptions, EntitiesOptions
@@ -18,27 +24,29 @@ natural_language_understanding = NaturalLanguageUnderstandingV1(
 natural_language_understanding.set_service_url('https://api.au-syd.natural-language-understanding.watson.cloud.ibm.com/instances/90774996-ec17-4440-b524-2c61f3a14481')
 
 app = Flask(__name__)
+CORS(app)
 
 @app.route('/')
 def home():
     return "Test Body"
 
-@app.route('/features/<text>/<followers>/<friends>/<verified>')
+@app.route('/features/<string:text>/<int:followers>/<int:friends>/<verified>')
 def extractFeatures(text, followers, friends, verified):
+    text = text.replace("-", " ")
     sentiment = 0.0
     entity_num = 0.0
     word_count = len(text.split())
     char_count = len(text)
     avg_word_len = char_count / word_count
-    follower_count = followers
+    follower_count = float(followers)
     anger = 0.0
     disgust = 0.0
     fear = 0.0
     joy = 0.0
     sadness = 0.0
     is_quote = 0.0
-    friends = friends
-    verified = 1.0 if verified else 0.0
+    friends = float(friends)
+    verified = 1.0 if verified == "true" else 0.0
 
     try:
         # sentiment analysis
@@ -63,10 +71,9 @@ def extractFeatures(text, followers, friends, verified):
 
         sentiment = sentiment + sentiment_sum / 2
     except:
-        pass 
+        pass
 
-    return(
-        {
+    dict = {
             "sentiment": sentiment,
             "entity_num": entity_num,
             "word_count": word_count,
@@ -82,15 +89,17 @@ def extractFeatures(text, followers, friends, verified):
             "friends": friends,
             "verified": verified
         }
-    )
+    return(jsonify(dict))
 
 @app.route("/predict/<features>")
 def makePrediction(features):
+    features = json.loads(features.replace("-", " "))
     # make prediction and return favorites, retweets, and whatever data we need for visualization
-    retweet_model = joblib.load("/models/retweet_model.joblib.pkl")
-    favorites_model = joblib.load("/models/favorites_model.joblib.pkl")
+    curdir = os.getcwd()
+    retweet_model = joblib.load(curdir + "/machine-learning/models/retweet_model.joblib.pkl")
+    favorites_model = joblib.load(curdir + "/machine-learning/models/favorites_model.joblib.pkl")
 
-    # TODO: use this to make a prediction
+    # use this to make a prediction
     input_data = []
     input_data.append(features["sentiment"])
     input_data.append(features["entity_num"])
@@ -103,17 +112,17 @@ def makePrediction(features):
     input_data.append(features["joy"])
     input_data.append(features["sadness"])
     input_data.append(features["is_quote"])
-    input_data.append(features["followers"])
+    input_data.append(features["follower_count"])
     input_data.append(features["friends"])
     input_data.append(features["verified"])
 
-    input_data = np.array(input_data)
+    input_data = np.array(input_data).reshape(1, -1)
 
-    prediction = {}
-    prediction["retweets"] = retweet_model.predict(input_data)
-    prediction["favorites"] = favorites_model.predict(input_data)
+    retweets = retweet_model.predict(input_data)
+    favorites = favorites_model.predict(input_data)
+    prediction = {"retweets": retweets[0, 0], "favorites": favorites[0, 0]}
 
-    return prediction
+    return(jsonify(prediction))
 
 if __name__ == "__main__":
     app.run()

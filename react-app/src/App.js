@@ -21,20 +21,20 @@ function App() {
 
     const handleTweet = (e) => {
         e.preventDefault();
-        // extract features        
-        fetch("/features/" + tweet + "/" + followers + "/" + friends + "/" + verified).then(res => res.json()).then(
+        // extract features    
+        fetch("http://localhost:5000/features/" + tweet.replace(" ", "-") + "/" + followers + "/" + friends + "/" + verified).then(res => res.json()).then(
             (result) => {
                 setFeatures(result)
+
+                // pass features into ML model
+                fetch("http://localhost:5000/predict/" + JSON.stringify(result).replace(" ", "-")).then(res => res.json()).then(
+                    (result) => {
+                        setFavorites(Math.round(result['favorites']))
+                        setRetweets(Math.round(result['retweets']))
+                    }
+                )
             }
         );
-
-        // pass features into ML model
-        fetch("/predict/" + features).then(res => res.json()).then(
-            (result) => {
-                setFavorites(result['favorites'])
-                setRetweets(result['retweets'])
-            }
-        )
     }
 
     return (
@@ -133,8 +133,8 @@ function App() {
 
                         <div>
                             <h3>Prediction</h3>
-                            <h5>Favorites: {favorites}</h5>
-                            <h5>Retweets: {retweets}</h5>
+                            <h5>Favorites:<br/> {favorites >= 0 ? favorites : 0}</h5>
+                            <h5>Retweets:<br/> {retweets >= 0 ? retweets : 0}</h5>
                         </div>
                     </div>
                 </div>
