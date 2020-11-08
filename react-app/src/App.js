@@ -38,7 +38,8 @@ function App() {
     return (
         <div className="App">
             <header className="App-header">
-                <h1 style={{fontWeight: "bold"}}>Predicting the Spread<br/>of COVID-19 Misinformation<br/>on Twitter</h1>
+                <h1>ViralCast</h1>
+                <h2 style={{fontWeight: "bold"}}>Predicting the Spread<br/>of COVID-19 Misinformation<br/>on Twitter</h2>
 
                 <div style={{display: "flex", flexDirection: "row", justifyContent: "space-evenly", margin: 64}}>
                     <img src={virus} className="App-logo" alt="logo"  style={{width: 200, height: 200, marginRight: 64}}/>
