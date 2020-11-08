@@ -10,7 +10,7 @@ The rampant spread of misinformation on platforms like Twitter caused much confu
 ViralCast demonstrates a model for predicting the spread of a tweet, predicting both the number of favorites and retweets it will receive, based on the properties of the tweet's text and the tweeter's follower count. The web app lets a user type in a tweet and fake follower count, and then receive a prediction.
 
 ## How We Built It
-We used a dataset of around 500k tweets related to COVID-19. Using IBM Watson Natural Language Understanding, we added data on sentiment, emotion, entities, and more to each entry. We trained a regression model using SciKit-Learn on this enhanced data. Using React and a Flask server, we created an interactive demo showcasing the model and its predictions.
+We used a dataset of around 500k tweets related to COVID-19. Using IBM Watson Natural Language Understanding, we added data on sentiment, emotion, entities, and more to each entry. We trained a regression model using SciKit-Learn on this enhanced data. Using React and a Flask server, we created an interactive demo showcasing the model and its predictions. We deployed our app on Heroku.
 
 ## Challenges We Ran Into
 Our first major challenge was figuring out how to represent Twitter text numerically with enough features to train an accurate model. After looking through numerous solutions, we settled on IBM Watson NLU for its easy-to-use API and multiple different analyses, such as sentiment, emotion, entities, and entity sentiment and emotion.
@@ -31,4 +31,4 @@ We learned a lot about visualization, natural language processing through the cl
 Our first next step is to train on more data and potentially integrate more features into the model, such as word embeddings. This will allow the model to reach its full potential. We could also explore ways to integrate the web app with a person's Twitter feed, perhaps through a browser extension, so that it can be put to use in daily life. Additionally, we can explore alternate datasets, such as "fake news" sets or sets for other topics impacted by misinformation, and see how well the concept generalizes.
 
 ## More Information
-Check out our [video demo](https://youtu.be/BCXJ6Oxg_Hc) and [DevPost submission](https://devpost.com/software/tbd-4cpvig).
+Check out our [video demo](https://youtu.be/BCXJ6Oxg_Hc), [DevPost submission](https://devpost.com/software/tbd-4cpvig), and [Heroku deployment](https://viral-cast.herokuapp.com/).
