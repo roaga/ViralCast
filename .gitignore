@@ -1,2 +1,11 @@
 venv/
 .env
+__pycache__/app.cpython-38.pyc
+machine-learning/processed_data/cleaned_tweets.csv
+machine-learning/processed_data/less_features.csv
+machine-learning/processed_data/more_data.csv
+__pycache__/app.cpython-38.pyc
+machine-learning/processed_data/__pycache__/textanalysis.cpython-38.pyc
+machine-learning/processed_data/tweet_data.csv
+__pycache__/app.cpython-38.pyc
+
