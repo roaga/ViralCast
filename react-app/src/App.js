@@ -138,7 +138,9 @@ function App() {
                     we trained a model to predict how far a tweet would spread<br/>based on properties of its language,<br/>including sentiment, emotion, and entity analysis.
                 </h5>
                 <h5 style={{lineHeight: 2}}>
-                    We used IBM Watson Natural Language Understanding for text analysis.
+                    We used IBM Watson Natural Language Understanding for text analysis
+                    <br/>
+                    and ridge regression in SciKit-Learn for machine learning.
                     <br/>
                     This web app was built in React and Flask.
                     <br/>
