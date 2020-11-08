@@ -12,7 +12,7 @@ import os
 """
 Pre-process the data here
 """
-path = os.path.join(os.getcwd(), "processed_data", "less_features.csv")
+path = os.path.join(os.getcwd(), "processed_data", "data.csv")
 with open(path, 'r') as csv_data:
     next(csv_data)
     data = np.loadtxt(csv_data, delimiter=',')

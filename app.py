@@ -86,6 +86,29 @@ def makePrediction(features):
     favorites_model = joblib.load("/models/favorites_model.joblib.pkl")
 
     # TODO: use this to make a prediction
+    input_data = []
+    input_data.append(features["sentiment"])
+    input_data.append(features["entity_num"])
+    input_data.append(features["word_count"])
+    input_data.append(features["avg_word_len"])
+    input_data.append(features["char_count"])
+    input_data.append(features["anger"])
+    input_data.append(features["disgust"])
+    input_data.append(features["fear"])
+    input_data.append(features["joy"])
+    input_data.append(features["sadness"])
+    input_data.append(features["is_quote"])
+    input_data.append(features["followers"])
+    input_data.append(features["friends"])
+    input_data.append(features["verified"])
+
+    input_data = np.array(input_data)
+
+    prediction = {}
+    prediction["retweets"] = retweet_model.predict(input_data)
+    prediction["favorites"] = favorites_model.predict(input_data)
+
+    return prediction
 
 if __name__ == "__main__":
     app.run()
