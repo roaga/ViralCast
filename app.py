@@ -26,20 +26,12 @@ natural_language_understanding.set_service_url('https://api.au-syd.natural-langu
 
 app = Flask(__name__)
 CORS(app)
-<<<<<<< HEAD
-=======
-
->>>>>>> 18c913e25cd540a339e2ef22c1d3a94828642317
 
 @app.route('/')
 def home():
     return "Test Body"
 
-<<<<<<< HEAD
 @app.route('/features/<string:text>/<int:followers>/<int:friends>/<verified>')
-=======
-@app.route('/features/<text>/<followers>/<friends>/<verified>', methods = ['GET','POST'])
->>>>>>> 18c913e25cd540a339e2ef22c1d3a94828642317
 def extractFeatures(text, followers, friends, verified):
     text = text.replace("-", " ")
     sentiment = 0.0
