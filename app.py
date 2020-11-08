@@ -6,6 +6,7 @@ import numpy as np
 from ibm_watson import NaturalLanguageUnderstandingV1
 from ibm_cloud_sdk_core.authenticators import IAMAuthenticator
 from ibm_watson.natural_language_understanding_v1 import Features, SentimentOptions, EntitiesOptions
+from flask_cors import CORS
 
 load_dotenv()
 IBM_CLOUD_KEY = os.getenv('IBM_CLOUD_KEY')
@@ -18,12 +19,14 @@ natural_language_understanding = NaturalLanguageUnderstandingV1(
 natural_language_understanding.set_service_url('https://api.au-syd.natural-language-understanding.watson.cloud.ibm.com/instances/90774996-ec17-4440-b524-2c61f3a14481')
 
 app = Flask(__name__)
+CORS(app)
+
 
 @app.route('/')
 def home():
     return "Test Body"
 
-@app.route('/features/<text>/<followers>/<friends>/<verified>')
+@app.route('/features/<text>/<followers>/<friends>/<verified>', methods = ['GET','POST'])
 def extractFeatures(text, followers, friends, verified):
     sentiment = 0.0
     entity_num = 0.0
@@ -84,11 +87,11 @@ def extractFeatures(text, followers, friends, verified):
         }
     )
 
-@app.route("/predict/<features>")
+@app.route("/predict/<features>", methods = ['GET','POST'])
 def makePrediction(features):
     # make prediction and return favorites, retweets, and whatever data we need for visualization
-    retweet_model = joblib.load("/models/retweet_model.joblib.pkl")
-    favorites_model = joblib.load("/models/favorites_model.joblib.pkl")
+    retweet_model = joblib.load("./machine-learning/models/retweet_model.joblib,pkl")
+    favorites_model = joblib.load("./machine-learning/models/favorites_model.joblib,pkl")
 
     # TODO: use this to make a prediction
     input_data = []

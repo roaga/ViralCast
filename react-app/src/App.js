@@ -6,6 +6,7 @@ import Iframe from 'react-iframe'
 import React, {useState, useRef} from 'react';
 import * as V from 'victory';
 import {VictoryChart, VictoryBar, VictoryLine, VictoryTheme, VictoryLegend, VictoryAxis} from 'victory';
+import client from './axios';
 
 function App() {
     const [tweet, setTweet] = useState("");
@@ -22,19 +23,22 @@ function App() {
     const handleTweet = (e) => {
         e.preventDefault();
         // extract features        
-        fetch("/features/" + tweet + "/" + followers + "/" + friends + "/" + verified).then(res => res.json()).then(
-            (result) => {
-                setFeatures(result)
-            }
-        );
+        client.post('features/' + tweet + '/' + followers + '/' + friends + '/' + verified)
+        .then(res => {
+            setFeatures(res.data)
+        })
+        .then(features =>  {
+            return client.post('predict/' + features)}
+        )
+        .then(res => console.log(res))
 
         // pass features into ML model
-        fetch("/predict/" + features).then(res => res.json()).then(
-            (result) => {
-                setFavorites(result['favorites'])
-                setRetweets(result['retweets'])
-            }
-        )
+        // fetch("/predict/" + features).then(res => res.json()).then(
+        //     (result) => {
+        //         setFavorites(result['favorites'])
+        //         setRetweets(result['retweets'])
+        //     }
+        // )
     }
 
     return (
