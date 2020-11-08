@@ -23,12 +23,12 @@ natural_language_understanding = NaturalLanguageUnderstandingV1(
 )
 natural_language_understanding.set_service_url('https://api.au-syd.natural-language-understanding.watson.cloud.ibm.com/instances/90774996-ec17-4440-b524-2c61f3a14481')
 
-app = Flask(__name__, static_folder="./build", static_url_path="/")
+app = Flask(__name__, static_folder="./build")
 CORS(app)
 
 @app.route('/')
 def home():
-    return app.send_static_file('index.html')
+    return render_template('index.html')
 
 @app.route('/api/features/<text>/<int:followers>/<int:friends>/<verified>')
 def extractFeatures(text, followers, friends, verified):
