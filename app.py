@@ -1,6 +1,7 @@
 from flask import Flask, redirect, url_for, render_template
 from dotenv import load_dotenv
 import os
+import joblib
 from ibm_watson import NaturalLanguageUnderstandingV1
 from ibm_cloud_sdk_core.authenticators import IAMAuthenticator
 from ibm_watson.natural_language_understanding_v1 import Features, SentimentOptions, EntitiesOptions
@@ -80,7 +81,9 @@ def extractFeatures(text, followers):
 
 @app.route("/predict/<features>")
 def makePrediction(features):
-    # TODO: make prediction and return favorites, retweets, and whatever data we need for visualization
+    # make prediction and return favorites, retweets, and whatever data we need for visualization
+    fit_model = joblib.load("/models/model.joblib.pkl")
+    # TODO: use this to make a prediction
 
 if __name__ == "__main__":
     app.run()

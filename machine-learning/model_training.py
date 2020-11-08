@@ -24,3 +24,5 @@ print(fit_model.predict(X_test))
 model_predictions = fit_model.predict(X_test)
 accuracy = np.count_nonzero(y_train == model_predictions)
 print(accuracy)
+
+_ = joblib.dump(fit_model, "/models/model.joblib,pkl", compress=9)
