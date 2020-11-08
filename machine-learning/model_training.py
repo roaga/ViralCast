@@ -53,6 +53,9 @@ favorites_pred = favorites_linear_regression.predict(favorites_features_test)
 print(retweets_pred - retweets_test)
 print(favorites_pred - retweets_test)
 
+retweet_dump = joblib.dump(retweet_linear_regression, "/models/retweet_model.joblib,pkl", compress=9)
+favorite_dump = joblib.dump(favorites_linear_regression, "/models/favorites_model.joblib,pkl", compress=9)
+
 retweets_score = retweet_linear_regression.score(retweets_features_test, retweets_test)
 favorites_score = favorites_linear_regression.score(favorites_features_test, favorites_test)
 # print("Retweets Score: " + str(retweets_score))

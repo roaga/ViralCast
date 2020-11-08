@@ -14,14 +14,14 @@
 }
 
 .App-header {
-  background-color: #282c34;
+  background-color: #fff;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
-  color: white;
+  color: black;
 }
 
 .App-link {
@@ -35,4 +35,59 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+textarea {
+    height: 150px;
+    width: 500px;
+    padding: 8px;
+    margin: 4px;
+    font-family: 'Cabin', sans-serif;
+    font-weight: 400;
+    font-size: 14pt;
+    border-radius: 10pt;
+    background: #FAF6F6;
+    border: none;
+    color: "#FCB5B5";
+    outline: none;
+    padding: 16px;
+}
+input[type=submit] {
+    width: 200px;
+    padding: 32px;
+    margin: 4px;
+    font-family: 'Cabin', sans-serif;
+    font-weight: 700;
+    font-size: 14pt;
+    border-radius: 10pt;
+    background: #FAF6F6; 
+    border: none;
+    cursor: pointer;
+    color: black;
+    background-color: #FAF6F6;
+    /* box-shadow: 0px 1px 10px grey; */
+    margin: 32px;
+    transform: scale(1);
+    transition: all 0.5s ease-in-out;
+}
+input[type=submit]:hover {
+    cursor: pointer;
+    background-color: #61dafb;
+    border-radius: 10pt;
+    transform: scale(1.2);
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+.scroll-down {
+    color: black;
+    transform: scale(1);
+    transition: all 0.5s ease-in-out;
+}
+.scroll-down:hover{
+    cursor: pointer;
+    transform: scale(1.2);
+    color: #61dafb;
 }
