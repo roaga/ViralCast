@@ -10,14 +10,14 @@ The rampant spread of misinformation on platforms like Twitter caused much confu
 ViralCast demonstrates a model for predicting the spread of a tweet, predicting both the number of favorites and retweets it will receive, based on the properties of the tweet's text and the tweeter's follower count. The web app lets a user type in a tweet and fake follower count, and then receive a prediction.
 
 ## How We Built It
-We used a dataset of around 500k tweets related to COVID-19. Using IBM Watson Natural Language Understanding, we added data on sentiment, emotion, entities, and more to each entry. We trained a ridge regression model using SciKit-Learn on this enhanced data. Using React and a Flask server, we created an interactive demo showcasing the model and its predictions.
+We used a dataset of around 500k tweets related to COVID-19. Using IBM Watson Natural Language Understanding, we added data on sentiment, emotion, entities, and more to each entry. We trained a regression model using SciKit-Learn on this enhanced data. Using React and a Flask server, we created an interactive demo showcasing the model and its predictions.
 
 ## Challenges We Ran Into
 Our first major challenge was figuring out how to represent Twitter text numerically with enough features to train an accurate model. After looking through numerous solutions, we settled on IBM Watson NLU for its easy-to-use API and multiple different analyses, such as sentiment, emotion, entities, and entity sentiment and emotion.
 
 Once this was settled, another big challenge we ran into was efficiency. How can we analyze thousands of rows of data through API calls without waiting hours? Our solution was to implement multithreading into our data processing script.
 
-Finally, we were considering 11 total text features and predicting 2 different variables. We needed to figure out a good model for handling this complexity, so we settled on ridge regression in SciKit-Learn.
+Finally, we were considering 11 total text features and predicting 2 different variables. We needed to figure out a good model for handling this complexity, so we settled on regression in SciKit-Learn.
 
 On another note, the team was split across two hemispheres, making communication and time management another challenge we learned to overcome.
 

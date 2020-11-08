@@ -82,7 +82,9 @@ def extractFeatures(text, followers):
 @app.route("/predict/<features>")
 def makePrediction(features):
     # make prediction and return favorites, retweets, and whatever data we need for visualization
-    fit_model = joblib.load("/models/model.joblib.pkl")
+    retweet_model = joblib.load("/models/retweet_model.joblib.pkl")
+    favorites_model = joblib.load("/models/favorites_model.joblib.pkl")
+
     # TODO: use this to make a prediction
 
 if __name__ == "__main__":
