@@ -12,4 +12,4 @@ for col in cols_to_drop:
     df.drop(col, axis=1, inplace=True)
 
 df = df[:100]
-df.to_csv('tweet_less_columns_and_rows.csv', index=False)
+df.to_csv('cleaned_tweets.csv', index=False)
