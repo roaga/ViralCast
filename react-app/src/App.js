@@ -22,7 +22,7 @@ function App() {
     const handleTweet = (e) => {
         e.preventDefault();
         // extract features    
-        let hostname = window.location.hostname
+        let hostname = window.location.hostname;
         fetch(hostname+ '/features/' + tweet.replace("#", "").replace(" ", "-").replace("?", "").replace("/", "") + "/" + followers + "/" + friends + "/" + verified).then(res => res.json()).then(
             (result) => {
                 setFeatures(result)
