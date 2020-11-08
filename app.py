@@ -12,6 +12,7 @@ from sklearn import metrics
 from ibm_watson import NaturalLanguageUnderstandingV1
 from ibm_cloud_sdk_core.authenticators import IAMAuthenticator
 from ibm_watson.natural_language_understanding_v1 import Features, SentimentOptions, EntitiesOptions
+from flask_cors import CORS
 
 load_dotenv()
 IBM_CLOUD_KEY = os.getenv('IBM_CLOUD_KEY')
@@ -25,12 +26,20 @@ natural_language_understanding.set_service_url('https://api.au-syd.natural-langu
 
 app = Flask(__name__)
 CORS(app)
+<<<<<<< HEAD
+=======
+
+>>>>>>> 18c913e25cd540a339e2ef22c1d3a94828642317
 
 @app.route('/')
 def home():
     return "Test Body"
 
+<<<<<<< HEAD
 @app.route('/features/<string:text>/<int:followers>/<int:friends>/<verified>')
+=======
+@app.route('/features/<text>/<followers>/<friends>/<verified>', methods = ['GET','POST'])
+>>>>>>> 18c913e25cd540a339e2ef22c1d3a94828642317
 def extractFeatures(text, followers, friends, verified):
     text = text.replace("-", " ")
     sentiment = 0.0
@@ -91,7 +100,7 @@ def extractFeatures(text, followers, friends, verified):
         }
     return(jsonify(dict))
 
-@app.route("/predict/<features>")
+@app.route("/predict/<features>", methods = ['GET','POST'])
 def makePrediction(features):
     features = json.loads(features.replace("-", " "))
     # make prediction and return favorites, retweets, and whatever data we need for visualization
