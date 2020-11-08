@@ -5,7 +5,7 @@ import { BsChevronDown } from "react-icons/bs";
 import Iframe from 'react-iframe'
 import React, {useState, useRef} from 'react';
 import * as V from 'victory';
-import {VictoryChart, VictoryBar, VictoryLine, VictoryTheme, VictoryLegend} from 'victory';
+import {VictoryChart, VictoryBar, VictoryLine, VictoryTheme, VictoryLegend, VictoryAxis} from 'victory';
 
 function App() {
     const [tweet, setTweet] = useState("");
@@ -60,6 +60,9 @@ function App() {
 
                     <div style={{display: "flex", flexDirection: "row", justifyContent: "space-evenly", marginTop: 0}}>
                         <VictoryChart theme={VictoryTheme.material} domainPadding={{x: 32, y: 32}} height={200} width={300}>
+                            <VictoryAxis dependentAxis label="TBD" fixLabelOverlap style={{tickLabels: {fontSize: 0}}}/>
+                            <VictoryAxis label="TBD" fixLabelOverlap style={{tickLabels: {fontSize: 0}}}/>
+
                             <VictoryLegend x={96} y={0}
                                 title=""
                                 centerTitle
