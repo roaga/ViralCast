@@ -2,7 +2,7 @@ from flask import Flask, redirect, url_for, render_template
 from dotenv import load_dotenv
 import os
 import joblib
-import * as np from numpy
+import numpy as np
 from ibm_watson import NaturalLanguageUnderstandingV1
 from ibm_cloud_sdk_core.authenticators import IAMAuthenticator
 from ibm_watson.natural_language_understanding_v1 import Features, SentimentOptions, EntitiesOptions
@@ -23,7 +23,7 @@ app = Flask(__name__)
 def home():
     return "Test Body"
 
-@app.route('/features/<str:text>/<int:followers>/<float:friends>/<bool:verified>')
+@app.route('/features/<text>/<followers>/<friends>/<verified>')
 def extractFeatures(text, followers, friends, verified):
     sentiment = 0.0
     entity_num = 0.0

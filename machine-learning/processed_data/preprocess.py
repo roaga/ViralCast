@@ -17,8 +17,12 @@ with open(path, 'r') as csvinput:
         #           "retweets", "favorites"]
 
         for row in rows:
-            row.pop(1)
-            row.pop(2)
-            row.pop(3)
-            row.pop(4)
-            writer.writerow(row)
+            data = []
+            data.append(row[2])
+            data.append(row[3])
+            data.append(row[4])
+            data.append(row[11])
+            data.append(row[14])
+            data.append(row[15])
+
+            writer.writerow(data)

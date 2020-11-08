@@ -12,7 +12,7 @@ import os
 """
 Pre-process the data here
 """
-path = os.path.join(os.getcwd(), "processed_data", "data.csv")
+path = os.path.join(os.getcwd(), "processed_data", "less_features.csv")
 with open(path, 'r') as csv_data:
     next(csv_data)
     data = np.loadtxt(csv_data, delimiter=',')
@@ -38,8 +38,8 @@ retweets_features_train, retweets_features_test, retweets_train, retweets_test =
 # Favorites Data Split
 favorites_features_train, favorites_features_test, favorites_train, favorites_test = train_test_split(features, favorites)
  # Algorithm 
-retweet_linear_regression = Ridge(max_iter=10000)
-favorites_linear_regression = Ridge(max_iter=10000)
+retweet_linear_regression = Lasso(max_iter=10000)
+favorites_linear_regression = Lasso(max_iter=10000)
 
 retweet_linear_regression.fit(retweets_features_train, retweets_train)
 favorites_linear_regression.fit(favorites_features_train, favorites_train)
