@@ -31,4 +31,4 @@ We learned a lot about visualization, natural language processing through the cl
 Our first next step is to train on more data and potentially integrate more features into the model, such as word embeddings. This will allow the model to reach its full potential. We could also explore ways to integrate the web app with a person's Twitter feed, perhaps through a browser extension, so that it can be put to use in daily life. Additionally, we can explore alternate datasets, such as "fake news" sets or sets for other topics impacted by misinformation, and see how well the concept generalizes.
 
 ## More Information
-Check out our [video demo](https://youtu.be/BCXJ6Oxg_Hc), [DevPost submission](https://devpost.com/software/tbd-4cpvig), and [Heroku deployment](https://viral-cast.herokuapp.com/).
+Check out our [video demo](https://youtu.be/BCXJ6Oxg_Hc), [DevPost submission](https://devpost.com/software/tbd-4cpvig), and [Heroku deployment](https://viral-cast.herokuapp.com/). 2nd Place Winner of IBM's Pandemic and Public Health Response Challenge, Top 15 Overall Teams by Wolfram.
