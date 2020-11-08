@@ -2,7 +2,7 @@
 [Rohan Agarwal](https://github.com/roaga)
 [Jed Magracia](https://github.com/nordaxion)
 [Hanif Fauzan](https://github.com/hanifzaans)
-[Bao Tran])(https://github.com/baotran01)
+[Bao Tran](https://github.com/baotran01)
 ## Inspiration
 The rampant spread of misinformation on platforms like Twitter caused much confusion and chaos in the face of an unprecedented pandemic, possibly leading to many preventable deaths. For the remainder of the COVID-19 pandemic and for any future pandemics, it is therefore important to be able to attack misinformation at its source. This is why we wanted to leverage machine learning to predict the spread of social media posts. If successful, platforms could use this technique to monitor and flag potential fake news before it goes viral and before it misleads thousands, not after.
 
