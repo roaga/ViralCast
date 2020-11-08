@@ -140,7 +140,7 @@ function App() {
                 <h5 style={{lineHeight: 2}}>
                     We used IBM Watson Natural Language Understanding for text analysis
                     <br/>
-                    and ridge regression in SciKit-Learn for machine learning.
+                    and regression in SciKit-Learn for machine learning.
                     <br/>
                     This web app was built in React and Flask.
                     <br/>
