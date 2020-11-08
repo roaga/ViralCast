@@ -119,9 +119,13 @@ def makePrediction(features):
 
     input_data = np.array(input_data).reshape(1, -1)
 
-    retweets = retweet_model.predict(input_data)
     favorites = favorites_model.predict(input_data)
-    prediction = {"retweets": retweets[0, 0], "favorites": favorites[0, 0]}
+    retweets = retweet_model.predict(np.concatenate((input_data, favorites.reshape(-1,1)), axis=1))
+
+    print(retweets)
+    print(favorites)
+    
+    prediction = {"retweets": int(retweets[0, 0]), "favorites": int(favorites[0])}
 
     return(jsonify(prediction))
 

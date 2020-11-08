@@ -94,4 +94,5 @@ def process_rows(rows, writer):
         data.append(favorites)
 
         writer.writerow(data)
+        print("Added successfully")
     

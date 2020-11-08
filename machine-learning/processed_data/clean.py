@@ -11,5 +11,5 @@ cols_to_drop = ['status_id', 'user_id', 'created_at','screen_name','source','rep
 for col in cols_to_drop:
     df.drop(col, axis=1, inplace=True)
 
-df = df[101:1000]
+df = df[100000:]
 df.to_csv('cleaned_tweets.csv', index=False)
