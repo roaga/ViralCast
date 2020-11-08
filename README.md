@@ -1,4 +1,4 @@
-# ViralCast -- HackRPI 2020
+# ViralCast - HackRPI 2020
 [Rohan Agarwal](https://github.com/roaga) / 
 [Jed Magracia](https://github.com/nordaxion) / 
 [Hanif Fauzan](https://github.com/hanifzaans) / 
