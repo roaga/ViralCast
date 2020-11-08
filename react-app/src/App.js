@@ -29,8 +29,8 @@ function App() {
                 // pass features into ML model
                 fetch('https://viral-cast.herokuapp.com/api/predict/' + JSON.stringify(result).replace(" ", "-")).then(res => res.json()).then(
                     (result) => {
-                        setFavorites(Math.round(Math.abs(result['favorites']) / 20))
-                        setRetweets(Math.round(Math.abs(result['retweets'])))
+                        setFavorites(Math.round(Math.abs(result['favorites']) / 40))
+                        setRetweets(Math.round(Math.abs(result['retweets'] * 2.5)))
                     }
                 )
             }
