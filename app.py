@@ -2,6 +2,7 @@ from flask import Flask, redirect, url_for, render_template
 from dotenv import load_dotenv
 import os
 import joblib
+import * as np from numpy
 from ibm_watson import NaturalLanguageUnderstandingV1
 from ibm_cloud_sdk_core.authenticators import IAMAuthenticator
 from ibm_watson.natural_language_understanding_v1 import Features, SentimentOptions, EntitiesOptions
@@ -22,8 +23,8 @@ app = Flask(__name__)
 def home():
     return "Test Body"
 
-@app.route('/features/<text>/<int:followers>')
-def extractFeatures(text, followers):
+@app.route('/features/<str:text>/<int:followers>/<float:friends>/<bool:verified>')
+def extractFeatures(text, followers, friends, verified):
     sentiment = 0.0
     entity_num = 0.0
     word_count = len(text.split())
@@ -36,6 +37,8 @@ def extractFeatures(text, followers):
     joy = 0.0
     sadness = 0.0
     is_quote = 0.0
+    friends = friends
+    verified = 1.0 if verified else 0.0
 
     try:
         # sentiment analysis
@@ -75,7 +78,9 @@ def extractFeatures(text, followers):
             "fear": fear,
             "joy": joy,
             "sadness": sadness,
-            "is_quote": is_quote
+            "is_quote": is_quote,
+            "friends": friends,
+            "verified": verified
         }
     )
 

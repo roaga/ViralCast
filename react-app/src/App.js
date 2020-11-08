@@ -10,7 +10,9 @@ import {VictoryChart, VictoryBar, VictoryLine, VictoryTheme, VictoryLegend, Vict
 function App() {
     const [tweet, setTweet] = useState("");
     const [followers, setFollowers] = useState(null);
+    const [friends, setFriends] = useState(null);
     const [favorites, setFavorites] = useState(0);
+    const [verified, setVerified] = useState(false);
     const [retweets, setRetweets] = useState(0);
     const [features, setFeatures] = useState(null);
     const myRef = useRef(null);
@@ -20,7 +22,7 @@ function App() {
     const handleTweet = (e) => {
         e.preventDefault();
         // extract features        
-        fetch("/features/" + tweet + "/" + followers).then(res => res.json()).then(
+        fetch("/features/" + tweet + "/" + followers + "/" + friends + "/" + verified).then(res => res.json()).then(
             (result) => {
                 setFeatures(result)
             }
@@ -107,6 +109,12 @@ function App() {
                             <h3>Test a Tweet</h3>
                             <textarea value={tweet} onChange={event => setTweet(event.target.value)} maxLength={280} placeholder="Write your tweet here."/>
                             <textarea type="number" value={followers} onChange={event => setFollowers(event.target.value.replace(/\D/g,''))} style={{height: 30}} maxLength={10} placeholder="How many followers do you have?"/>
+                            <textarea type="number" value={friends} onChange={event => setFriends(event.target.value.replace(/\D/g,''))} style={{height: 30}} maxLength={10} placeholder="How many do you follow back?"/>
+                            <div style={{flexDirection: "row", display: "flex", alignItems: "center"}}>
+                                <input type="checkbox" value={"Verified?"} id="verified" onChange={() => setVerified(!verified)}/>
+                                <h6 style={{marginLeft: 16}}>Verified?</h6>
+                            </div>
+        
                             <input type="submit" value={"Predict Spread"}/>
                         </form>
 
