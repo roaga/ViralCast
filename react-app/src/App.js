@@ -22,12 +22,13 @@ function App() {
     const handleTweet = (e) => {
         e.preventDefault();
         // extract features    
-        fetch('${window.location.hostname}:5000' + '/features/' + tweet.replace("#", "").replace(" ", "-").replace("?", "").replace("/", "") + "/" + followers + "/" + friends + "/" + verified).then(res => res.json()).then(
+        let hostname = window.location.hostname
+        fetch(hostname+ '/features/' + tweet.replace("#", "").replace(" ", "-").replace("?", "").replace("/", "") + "/" + followers + "/" + friends + "/" + verified).then(res => res.json()).then(
             (result) => {
                 setFeatures(result)
 
                 // pass features into ML model
-                fetch('${window.location.hostname}:5000' + '/predict/' + JSON.stringify(result).replace(" ", "-")).then(res => res.json()).then(
+                fetch(hostname + '/predict/' + JSON.stringify(result).replace(" ", "-")).then(res => res.json()).then(
                     (result) => {
                         setFavorites(Math.round(Math.abs(result['favorites']) / 20))
                         setRetweets(Math.round(Math.abs(result['retweets'])))
