@@ -5,6 +5,7 @@ from dotenv import load_dotenv
 from ibm_watson import NaturalLanguageUnderstandingV1
 from ibm_cloud_sdk_core.authenticators import IAMAuthenticator
 from ibm_watson.natural_language_understanding_v1 import Features, SentimentOptions, EntitiesOptions
+exec(open('clean.py').read())
 
 load_dotenv()
 IBM_CLOUD_KEY = os.getenv('IBM_CLOUD_KEY')
@@ -17,7 +18,7 @@ natural_language_understanding = NaturalLanguageUnderstandingV1(
 natural_language_understanding.set_service_url('https://api.au-syd.natural-language-understanding.watson.cloud.ibm.com/instances/90774996-ec17-4440-b524-2c61f3a14481')
 
 curdir = os.getcwd()
-path = curdir + '\data'
+path = curdir + '\2020-04-16 Coronavirus Tweets.csv'
 with open(path, 'r') as csvinput, open(path, 'w') as csvoutput:
     writer = csv.writer(csvoutput, lineterminator='\n')
     reader = csv.reader(csvinput)
