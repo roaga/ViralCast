@@ -29,8 +29,8 @@ function App() {
                 // pass features into ML model
                 fetch("http://localhost:5000/predict/" + JSON.stringify(result).replace(" ", "-")).then(res => res.json()).then(
                     (result) => {
-                        setFavorites(Math.round(result['favorites']))
-                        setRetweets(Math.round(result['retweets']))
+                        setFavorites(Math.round(Math.abs(result['favorites']) / 20))
+                        setRetweets(Math.round(Math.abs(result['retweets'])))
                     }
                 )
             }
@@ -133,8 +133,8 @@ function App() {
 
                         <div>
                             <h3>Prediction</h3>
-                            <h5>Favorites:<br/> {favorites >= 0 ? favorites : 0}</h5>
-                            <h5>Retweets:<br/> {retweets >= 0 ? retweets : 0}</h5>
+                            <h5>Favorites:<br/> {favorites}</h5>
+                            <h5>Retweets:<br/> {retweets}</h5>
                         </div>
                     </div>
                 </div>
