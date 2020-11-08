@@ -28,7 +28,7 @@ CORS(app)
 
 @app.route('/')
 def home():
-    return render_template('index.html')
+    return app.send_static_file('index.html')
 
 @app.route('/api/features/<text>/<int:followers>/<int:friends>/<verified>')
 def extractFeatures(text, followers, friends, verified):
