@@ -23,7 +23,7 @@ function App() {
         e.preventDefault();
         // extract features    
         let hostname = window.location.hostname;
-        console.log(hostname)
+        console.log(window.location)
         fetch(hostname+ '/features/' + tweet.replace("#", "").replace(" ", "-").replace("?", "").replace("/", "") + "/" + followers + "/" + friends + "/" + verified).then(res => res.json()).then(
             (result) => {
                 setFeatures(result)
