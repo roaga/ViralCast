@@ -28,7 +28,6 @@ def process_rows(rows, writer):
 
         # Get analysis
         sentiment = 0.0
-        magnitude = 0.0
         entity_num = 0.0
         word_count = len(text.split())
         char_count = len(text)
@@ -78,11 +77,10 @@ def process_rows(rows, writer):
         # Create new row
         data = []
         data.append(sentiment)
-        data.append(magnitude)
         data.append(entity_num)
         data.append(word_count)
-        data.append(char_count)
         data.append(avg_word_len)
+        data.append(char_count)
         data.append(anger)
         data.append(disgust)
         data.append(fear)
@@ -92,8 +90,8 @@ def process_rows(rows, writer):
         data.append(followers)
         data.append(friends)
         data.append(verified)
-        data.append(favorites)
         data.append(retweets)
+        data.append(favorites)
 
         writer.writerow(data)
     
