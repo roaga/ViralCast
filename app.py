@@ -120,7 +120,7 @@ def makePrediction(features):
 
     retweets = retweet_model.predict(input_data)
     favorites = favorites_model.predict(input_data)
-    prediction = {"retweets": retweets[0], "favorites": favorites[0]}
+    prediction = {"retweets": retweets[0][0], "favorites": favorites[0][0]}
 
     return(jsonify(prediction))
 
