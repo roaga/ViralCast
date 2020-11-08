@@ -31,7 +31,7 @@ CORS(app)
 def home():
     return "Test Body"
 
-@app.route('/features/<string:text>/<int:followers>/<int:friends>/<verified>')
+@app.route('/features/<text>/<int:followers>/<int:friends>/<verified>')
 def extractFeatures(text, followers, friends, verified):
     text = text.replace("-", " ")
     sentiment = 0.0

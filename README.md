@@ -15,7 +15,7 @@ We used a dataset of around 500k tweets related to COVID-19. Using IBM Watson Na
 ## Challenges We Ran Into
 Our first major challenge was figuring out how to represent Twitter text numerically with enough features to train an accurate model. After looking through numerous solutions, we settled on IBM Watson NLU for its easy-to-use API and multiple different analyses, such as sentiment, emotion, entities, and entity sentiment and emotion.
 
-Once this was settled, another big challenge we ran into was efficiency. How can we analyze thousands of rows of data through API calls without waiting hours? Our solution was to implement multithreading into our data processing script.
+Once this was settled, another big challenge we ran into was efficiency. How can we preprocess thousands of rows of data quick enough for a 24-hour project? Our solution was to implement multithreading into our data processing script.
 
 Finally, we were considering 11 total text features and predicting 2 different variables. We needed to figure out a good model for handling this complexity, so we settled on regression in SciKit-Learn.
 
