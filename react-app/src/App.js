@@ -5,7 +5,7 @@ import { BsChevronDown } from "react-icons/bs";
 import Iframe from 'react-iframe'
 import React, {useState, useRef} from 'react';
 import * as V from 'victory';
-import {VictoryChart, VictoryBar, VictoryLine, VictoryTheme, VictoryLegend, VictoryAxis} from 'victory';
+import {VictoryChart, VictoryBar, VictoryLine, VictoryTheme, VictoryLegend, VictoryAxis, VictoryPie} from 'victory';
 
 function App() {
     const [tweet, setTweet] = useState("");
@@ -60,44 +60,30 @@ function App() {
                         display="initial"
                         position="relative"
                     /> */}
-
+                    <h3>R-squared values for Models Predicting...</h3>
                     <div style={{display: "flex", flexDirection: "row", justifyContent: "space-evenly", marginTop: 0}}>
-                        <VictoryChart theme={VictoryTheme.material} domainPadding={{x: 32, y: 32}} height={200} width={300}>
-                            <VictoryAxis dependentAxis label="TBD" fixLabelOverlap style={{tickLabels: {fontSize: 0}}}/>
-                            <VictoryAxis label="TBD" fixLabelOverlap style={{tickLabels: {fontSize: 0}}}/>
-
-                            <VictoryLegend x={96} y={0}
-                                title=""
-                                centerTitle
-                                orientation="horizontal"
-                                gutter={16}
-                                style={{title: {fontSize: 8 }, data: {size: 4}, labels: {fontSize: 8}}}
-                                data={[
-                                    { name: "Favorites", symbol: { fill: "#e7505f" } },
-                                    { name: "Retweets", symbol: { fill: "#61dafb" } }
-                                ]}
-                            />
-                            <VictoryLine
-                                style={{ data: { stroke: "#e7505f" }}}
-                                animate={{duration: 2000, onLoad: { duration: 1000 }}} 
-                                data={[
-                                    {x: 10, y: 1},
-                                    {x: 3, y: 2},
-                                    {x: 5, y: 10}
-                                ]}
-                                interpolation="natural"
-                            />
-                            <VictoryLine
-                                style={{ data: { stroke: "#61dafb" } }}
-                                animate={{duration: 2000, onLoad: { duration: 1000 }}} 
-                                data={[
-                                    {x: 9, y: 1},
-                                    {x: 3, y: 4},
-                                    {x: 5, y: 8}
-                                ]}
-                                interpolation="natural"
-                            />
-                        </VictoryChart>
+                        <h3 style={{color: "#e7505f"}}>Favorites</h3>
+                        <h3 style={{color: "#61dafb"}}>Retweets</h3>
+                    </div>
+                    <div style={{display: "flex", flexDirection: "row", justifyContent: "space-evenly", marginTop: 0}}>
+                        <VictoryPie
+                            standalone={true}
+                            width={300} height={300}
+                            animate={{duration: 2000, onLoad: { duration: 1000 }}} 
+                            innerRadius={48}
+                            cornerRadius={10}
+                            data={[{x: "0.95", y: 0.95}, {x: " ", y: 0.05}]}
+                            colorScale={["#e7505f", "white"]}
+                        />
+                        <VictoryPie
+                            standalone={true}
+                            width={300} height={300}
+                            animate={{duration: 2000, onLoad: { duration: 1000 }}} 
+                            innerRadius={48}
+                            cornerRadius={10}
+                            data={[{x: "0.92", y: 0.92}, {x: " ", y: 0.05}]}
+                            colorScale={["#61dafb", "white"]}
+                        />
                     </div>
                 </div>
 
