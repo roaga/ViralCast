@@ -6,7 +6,6 @@ import Iframe from 'react-iframe'
 import React, {useState, useRef} from 'react';
 import * as V from 'victory';
 import {VictoryChart, VictoryBar, VictoryLine, VictoryTheme, VictoryLegend, VictoryAxis} from 'victory';
-import client from './axios';
 
 function App() {
     const [tweet, setTweet] = useState("");
