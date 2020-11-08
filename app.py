@@ -120,7 +120,7 @@ def makePrediction(features):
 
     retweets = retweet_model.predict(input_data)
     favorites = favorites_model.predict(input_data)
-    prediction = {"retweets": np.squeeze(retweets), "favorites": np.squeeze(favorites)}
+    prediction = {"retweets": np.squeeze(retweets)[()], "favorites": np.squeeze(favorites)[()]}
 
     return(jsonify(prediction))
 
